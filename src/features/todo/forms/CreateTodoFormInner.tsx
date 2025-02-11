@@ -1,42 +1,35 @@
-// import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-// import { Input } from "@/components/ui/input"
-// import { useForm } from "react-hook-form"
-
+import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useFormContext } from "react-hook-form"
+import { type CreateTodoFormSchema } from "../types"
 
 type CreateTodoFormInnerProps = {
-  formID: string
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  handleChangeTodo: (event: React.ChangeEvent<HTMLInputElement>) => void
+  formID: string,
+  onSubmit: (values: CreateTodoFormSchema) => void
 }
 
 export const CreateTodoFormInner = ({
   formID,
   onSubmit,
-  handleChangeTodo
 }: CreateTodoFormInnerProps) => {
-  return (
-    <form id={formID} onSubmit={onSubmit}className="w-full" >
-      <Input onChange={handleChangeTodo} placeholder="Add a new todo..." />
-    </form>
 
-    // <form id={formID} onSubmit={onSubmit} className="w-full">
-    //   <FormField
-    //     control={form.control}
-    //     name="todo"
-    //     render={({ field }) => (
-    //       <FormItem>
-    //         <FormLabel>Todo</FormLabel>
-    //         <FormControl>
-    //           <Input onChange={handleChangeTodo} placeholder="Add a new todo..." {...field} />
-    //         </FormControl>
-    //         <FormDescription>This is your task to complete.</FormDescription>
-    //         <FormMessage />
-    //       </FormItem>
-    //     )}
-    //   />
-    // </form >
+  const form = useFormContext<CreateTodoFormSchema>()
+
+  return (
+    <form id={formID} onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <FormField
+        control={form.control}
+        name="text"
+        render={({ field }) => (
+          <FormItem>
+            <FormControl>
+              <Input placeholder="add new todo" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </form>
   )
 }
-
 

@@ -1,3 +1,4 @@
+import { TanstackProvider } from "./TanstackProvider";
 import { ThemeProvider } from "./ThemeProvider";
 
 export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -8,7 +9,9 @@ export const Providers: React.FC<React.PropsWithChildren> = ({ children }) => {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <TanstackProvider>
+        {children}
+      </TanstackProvider>
     </ThemeProvider>
   );
 };

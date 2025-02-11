@@ -16,7 +16,7 @@ export type MetaProps = {
   limit: number;
 };
 
-export type DataResponse<T> = {
+export type QueryResponse<T> = {
   data: T[];
   meta: MetaProps;
 };
@@ -35,3 +35,10 @@ export type MutationApiProps<T> = {
   isError: boolean;
   error: string;
 };
+
+export type ApiProps<T = undefined> = {
+  id?: T;
+  onSuccess?: () => void;
+  onError?: () => void;
+  onMutate?: () => void;
+}

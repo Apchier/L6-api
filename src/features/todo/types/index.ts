@@ -1,3 +1,6 @@
+import { type z } from "zod";
+import { type createTodoFormSchema } from "../schemas";
+
 export type Todo = {
   id: string;
   text: string;
@@ -6,11 +9,9 @@ export type Todo = {
   updated_at: Date | string;
 };
 
-export type CreateTodoFormSchema = {
-  text: string;
-};
+export type CreateTodoFormSchema = z.infer<typeof createTodoFormSchema>;
 
 export type UpdateTodoFormSchema = {
   text?: string;
   status?: boolean;
-};
+}

@@ -1,15 +1,16 @@
-import { Pencil, Trash2, Eye } from "lucide-react";
+import { Pencil, Eye } from "lucide-react";
 import { TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Button } from "@/components/ui/button";
 import { renderElements } from "@/utils/render-elements";
-import { useTodos } from "../api/useTodos";
 import { TodoTableBodySkeleton } from "../components/skeleton/TodoTableBodySkeleton";
 import { TodoCheckBox } from "../components";
 import Link from "next/link";
+import { useTodos } from "../api";
+import { DeleteTodoDialog } from "../components/dialog/DeleteTodoDialog";
 
 export const TodoTableBody = () => {
-    const { data: TodoList, isLoading: isTodoLoading } = useTodos()
-
+    const { data: todoList, isLoading: isTodoLoading } = useTodos()
+    
     if (isTodoLoading) {
         return <TodoTableBodySkeleton />
     }
@@ -17,13 +18,13 @@ export const TodoTableBody = () => {
     return (
         <TableBody>
             {renderElements({
-                of: TodoList,
+                of: todoList?.data,
                 render: (todo, index) => (
                     <TableRow key={todo.id}>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{todo.text}</TableCell>
                         <TableCell className="text-center">
-                            <TodoCheckBox todoID={todo.id} statusChecked={todo.status}/>
+                            <TodoCheckBox todoID={todo.id} statusChecked={todo.status} />
                         </TableCell>
                         <TableCell className="text-center">
                             <div className="flex justify-center gap-2">
@@ -45,15 +46,7 @@ export const TodoTableBody = () => {
                                         <Pencil className="h-4 w-4" />
                                     </Button>
                                 </Link>
-                                <Link href="#">
-                                    <Button
-                                        variant="outline"
-                                        size="icon"
-                                        className="h-8 w-8 text-red-500 hover:text-red-600 hover:bg-red-50"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
-                                </Link>
+                                <DeleteTodoDialog todoID={todo.id} />
                             </div>
                         </TableCell>
                     </TableRow>
