@@ -18,7 +18,7 @@ export const CreateTodoForm = () => {
     const refetch = useTodos()
 
     const {mutate: createTodo} = useCreateTodo({
-        onSuccess() {
+        onSuccess:() => {
             form.reset()
             toast.success("Todo deleted successfully")
             void refetch.refetch()

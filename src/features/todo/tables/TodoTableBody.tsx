@@ -28,7 +28,7 @@ export const TodoTableBody = () => {
                         </TableCell>
                         <TableCell className="text-center">
                             <div className="flex justify-center gap-2">
-                                <Link href="/">
+                                <Link href={`/todo/${todo.id}/detail`}>
                                     <Button
                                         variant="outline"
                                         size="icon"
@@ -37,7 +37,7 @@ export const TodoTableBody = () => {
                                         <Eye className="h-4 w-4" />
                                     </Button>
                                 </Link>
-                                <Link href="#">
+                                <Link href={`/todo/${todo.id}/edit`}>
                                     <Button
                                         variant="outline"
                                         size="icon"

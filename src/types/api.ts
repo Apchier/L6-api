@@ -1,7 +1,7 @@
 import { type ZodError } from "zod";
 
 export type ApiResponse<T> = {
-  status: boolean;
+  status?: boolean;
   statusCode: number;
   message: string;
   data?: T;
@@ -41,4 +41,5 @@ export type ApiProps<T = undefined> = {
   onSuccess?: () => void;
   onError?: () => void;
   onMutate?: () => void;
+  
 }

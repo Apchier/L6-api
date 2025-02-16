@@ -1,0 +1,1 @@
+export { DetailTodoPage as default } from "@/features/todo/pages"

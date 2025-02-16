@@ -6,3 +6,7 @@ export const createTodoFormSchema = z.object({
         .min(1, "Todo must be not null")
         .max(100, "Maximum 100 characters"),
 })
+
+export const updateTodoFormSchema = createTodoFormSchema.partial().extend({
+    status: z.boolean().optional(),
+})
